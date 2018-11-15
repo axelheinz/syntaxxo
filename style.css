@@ -1,0 +1,18 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  color: #3b557f;
+  font-weight: lighter;
+}
+
+
+body button {
+  background-color: #3b557f;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 10px;
+  border: 10;
+  box-shadow: 50;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
