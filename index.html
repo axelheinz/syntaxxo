@@ -14,18 +14,27 @@
 
 <body>
   <div>
-    <h1>SYNTAXXO</h1>
-    <p>Type each code snipped faster than gravity ...</p>
+    <h1 id="startPage" >SYNTAXXO</h1>
+    <p>The world is attacked by dangerous code out of a black hole!</p>
+    <p>Save the world by typing the code faster than it reaches you.</p>
+    <p>Get more points if you type code as fast as possible.</p>
+    <br>
+    <span>Enter your name:  </span>
+    <input id="enteredPlayer" type="text" name="input" value="" >
+    <br>
+    <br>
+    
   </div>
+
   <div>
     <button id="startButton">Start SYNTAXXO</button>
   </div>
   <canvas id="syntaxxo-frame" height="500px" width="400px"></canvas>
   
-  <div class="inputLine">
+  <div class="inputLine" id="inputLine">
     <span>Enter your code here: </span>
     <input type="text" name="input" value="" id="enteredCode">
-    <button  id="enterButton">Enter</button>
+    <button  id="enterButton">Fire!</button>
   </div>
 
 </body>

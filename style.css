@@ -1,30 +1,33 @@
 html {
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  color: #3b557f;
+  color: #00f4fc;
   font-weight: lighter;
+  background: black;
 }
 
+h1 {
+  font-size: 24px;
+}
 
 body button {
-  background-color: #3b557f;
-  color: #fff;
+  background-color: #00f4fc;
+  color: #3b557f;
   font-size: 18px;
+  font-weight: bold;
   padding: 10px 10px;
-  border: 10;
-  box-shadow: 50;
+  border: 50;
+  border-color: white;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
 .inputLine {
   font-size: 16px;
-  padding: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 0px;
 }
 
 .enterButton {
-  background-color: #3b557f;
-  color: #fff;
   font-size: 16px;
   padding: 10px 10px;
   border: 10;
