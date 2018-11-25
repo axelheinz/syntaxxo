@@ -4,6 +4,7 @@ html {
   color: #00f4fc;
   font-weight: lighter;
   background: black;
+  padding: 0px 0px 0px 50px;
 }
 
 h1 {
@@ -22,9 +23,13 @@ body button {
   margin-bottom: 20px;
 }
 
+
+
+
+
 .inputLine {
   font-size: 16px;
-  padding: 20px 20px 20px 0px;
+  padding: 20px 20px 20px 50px;
 }
 
 .enterButton {

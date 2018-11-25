@@ -1,60 +1,16 @@
 // Code elements that user has to type
-var codeArray = [
-  {
-    codeSnippet: "<img>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<div>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<h1>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<li>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<th>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<button>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<a>",
-    codeBase: "html",
-    gameLevel: 1
-  },
-  {
-    codeSnippet: "<span>",
-    codeBase: "html",
-    gameLevel: 1
-  }
-];
+var htmlArray = ["<img>","<div>","<h1>","<li>","<th>","<button>","<a>","<span>","</p>",'id="game"',"</div>", "<ul>","<br>", '<img src="">']
 
+var jscrArray = ['var x=1','function(){}','var array=[]','ctx.clearRect()','window.onload','document.getElementById','$("#id").hide()','$("#id").show()','array.splice(0,1)','Math.floor(Math.random())', 'window.requestAnimationFrame()']
 
 var playerName = "";
-var x1 = 180;
-var x2 = 100;
-var correctCount = 1;
-var levelCount = 1;
-var levelSpeed = 0.5;
 
 var backgroundSound = new Audio("./sounds/background.mp3");
 var errorSound = new Audio("./sounds/error1.mp3");
 var correctSound = new Audio("./sounds/correct1.mp3");
 var levelUp = new Audio("./sounds/levelup.mp3");
 var gameOver = new Audio("./sounds/gameover.mp3");
+var codetypeArray = [];
 
 window.onload = function() {
   // hides the canvas and game form field before the game started
@@ -63,7 +19,7 @@ window.onload = function() {
     .hide();
   $("#startText").show();
 
-  document.getElementById("startButton").onclick = function() {
+  document.getElementById("startButtonJSC").onclick = function() {
     $("#enterButton")
       .parent()
       .show();
@@ -71,8 +27,21 @@ window.onload = function() {
       .siblings()
       .hide();
     playerName = $("#enteredPlayer").prop("value");
-
     backgroundSound.onload = backgroundSound.play();
+    codetypeArray = jscrArray;
+    startGame();
+  };
+  
+  document.getElementById("startButtonHTML").onclick = function() {
+    $("#enterButton")
+      .parent()
+      .show();
+    $("#startPage")
+      .siblings()
+      .hide();
+    playerName = $("#enteredPlayer").prop("value");
+    backgroundSound.onload = backgroundSound.play();
+    codetypeArray = htmlArray;
     startGame();
   };
 
@@ -80,7 +49,13 @@ window.onload = function() {
     var enterArray = []; // array of entered code elements that user typed
     var gameArray = []; // array of randomly picked code that user has to type
     var gameScore = 0; // score the user achieves
-    var gameLives = 3; // count of mistakes possible until game over
+    var gameLives = 1; // count of mistakes possible until game over
+    var x1 = 180;
+    var x2 = 100;
+    var correctCount = 1;
+    var levelCount = 1;
+    var levelSpeed = 0.3;
+   
 
     var ctx = document.getElementById("syntaxxo-frame").getContext("2d");
     ctx.clearRect(0, 0, 400, 200);
@@ -105,12 +80,43 @@ window.onload = function() {
     };
     imgHome.src = "./images/homeplanet.png";
 
+    var background = {
+      x: 0,
+      y: 0
+    };
+
+    var bottomObject = {
+      x: 0,
+      y: 450,
+      width: 400,
+      height: 50
+    };
+
+    var boostScore = 0;
+
+    var y1 = 0;
+
+    var codeObject = {
+      x: 80
+    };
+
+    var imgX = 400;
+    var imgY = 350;
+
+    var gameCode = getRandomCode(); // to pass the code to type into the updateCanvas function
+
+    // var frameCount = 0
+
+    var isCorrectFrameCount = -1;
+    var isCorrect = false;
+    var oldY1 = 0;
+
     function getRandomCode() {
       gameArray.splice(0, 1);
-      var rndCode = Math.floor(Math.random() * codeArray.length);
+      var rndCode = Math.floor(Math.random() * codetypeArray.length);
       //console.log(codeArray[rndCode].codeSnippet);
-      gameArray.push(codeArray[rndCode].codeSnippet);
-      return codeArray[rndCode].codeSnippet;
+      gameArray.push(codetypeArray[rndCode]);
+      return codetypeArray[rndCode];
     }
 
     function getenteredCode() {
@@ -149,12 +155,10 @@ window.onload = function() {
     }
 
     function drawBackground(background) {
-      ctx.drawImage(imgBack, background.x, background.y, 400, 500);
+      imgX = imgX + 0.02;
+      imgY = imgY + 0.02;
+      ctx.drawImage(imgBack, background.x, background.y, imgX, imgY);
     }
-
-    //function drawGun() {
-      //ctx.drawImage(imgLaser, 160, 415, 100, 70);
-    //}
 
     function drawHome() {
       ctx.drawImage(imgHome, 0, 450, 400, 50);
@@ -162,14 +166,12 @@ window.onload = function() {
 
     function drawCode() {
       ctx.font = "20px Roboto";
-      ctx.fillStyle = "#fff";
+      var r= 100;
+      var g= Math.floor((Math.random()*100) * 2.5);
+      var b= Math.floor((Math.random()*100) * 2.5);
+      ctx.fillStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')'; 
       ctx.fillText(gameCode, x1, y1);
     }
-
-    //function drawBottom() {
-    //  ctx.fillStyle = "#444444";
-    //  ctx.fillRect(0, 450, 400, 50);
-    //}
 
     function drawPlayername() {
       ctx.font = "12px Roboto";
@@ -186,13 +188,13 @@ window.onload = function() {
     function drawScore() {
       ctx.font = "12px Roboto";
       ctx.fillStyle = "#fff";
-      ctx.fillText("Your Score: " + gameScore, 300, 20);
+      ctx.fillText("Your Score: " + gameScore, 290, 20);
     }
 
     function drawBoost() {
       ctx.font = "12px Roboto";
       ctx.fillStyle = "#fff";
-      ctx.fillText("Booster: " + boostScore, 300, 50);
+      ctx.fillText("Booster: " + boostScore, 290, 50);
     }
 
     function drawLevel() {
@@ -207,12 +209,14 @@ window.onload = function() {
       else {
         ctx.beginPath();
         ctx.strokeStyle = "#a5faff";
+        ctx.moveTo(195, 450);
+        ctx.lineTo(oldX1 + 30, oldY1);
+        ctx.strokeStyle = "#a5faff";
         ctx.moveTo(200, 450);
-        ctx.lineTo(oldX1, oldY1);
-        //ctx.closePath();
+        ctx.lineTo(oldX1 + 30, oldY1);
         ctx.strokeStyle = "#a5faff";
         ctx.moveTo(205, 450);
-        ctx.lineTo(oldX1, oldY1);
+        ctx.lineTo(oldX1 + 30, oldY1);
         ctx.stroke();
         ctx.font = "30px Roboto";
         if (isCorrect) {
@@ -223,7 +227,7 @@ window.onload = function() {
         } else {
           ctx.fillStyle = "#a3352f";
           ctx.fillText("BUG!", oldX1 - 40, oldY1);
-          ctx.fillStyle =  "#fc6f67";
+          ctx.fillStyle = "#fc6f67";
           ctx.fillText("BUG!", oldX1 - 42, oldY1 - 2);
         }
       }
@@ -232,24 +236,35 @@ window.onload = function() {
     function drawHighscore() {
       var highscoresArray =
         JSON.parse(localStorage.getItem("highscores")) || [];
-
-      // top 5
-      // sortiert
+      highscoresArray.sort(function(a, b) {
+        if (a.score < b.score) {
+          return 1;
+        }
+        if (a.score > b.score) {
+          return -1;
+        }
+        return 0;
+      });
       highscoresArray.forEach(function(el, index) {
         ctx.font = "20px Roboto";
-      ctx.fillStyle = "#6b6b6b";
-      ctx.fillText("HIGHSCORES", 122, 162);
-      ctx.fillStyle = "#fff";
-      ctx.fillText("HIGHSCORES", 120, 162);
-        ctx.font = "20px Roboto";
+        ctx.fillStyle = "#6b6b6b";
+        ctx.textAlign = "center";
+        ctx.fillText("HIGHSCORES", 202, 162);
         ctx.fillStyle = "#fff";
-        ctx.fillText(el.name + "   " + el.score, 120, 180 + index * 30);
+        ctx.fillText("HIGHSCORES", 200, 160);
+
+        if (index <= 9) {
+          ctx.font = "20px Roboto";
+          ctx.fillStyle = "#fff";
+          ctx.textAlign = "center";
+          ctx.fillText(el.name + "   " + el.score, 200, 190 + index * 30);
+        }
       });
     }
 
     function drawGameOver() {
-      //ctx.clearRect(0, 0, 400, 500);
-      drawBackground(background);
+      ctx.clearRect(0, 0, 400, 500);
+      ctx.drawImage(imgBack, background.x, background.y, 400, 350);
       gameLives = 0;
       drawPlayername();
       drawLives();
@@ -261,31 +276,9 @@ window.onload = function() {
       ctx.fillText("GAME OVER", 120, 100);
       storeHighscore();
       drawHighscore();
-
+      $("#enteredCode").val("");
       gameOver.play();
     }
-
-    var background = {
-      x: 0,
-      y: 0
-    };
-
-    var bottomObject = {
-      x: 0,
-      y: 450,
-      width: 400,
-      height: 50
-    };
-
-    var boostScore = 0;
-
-    var y1 = 0;
-
-    var codeObject = {
-      x: 80
-    };
-
-    var gameCode = getRandomCode(); // to pass the code to type into the updateCanvas function
 
     function drawCorrect() {
       isCorrectFrameCount--;
@@ -311,42 +304,6 @@ window.onload = function() {
         //ctx.fillText("FALSE", 160, 480);
       }
     }
-
-    // var frameCount = 0
-
-    var isCorrectFrameCount = -1;
-    var isCorrect = false;
-
-    var oldY1 = 0;
-
-    function updateCanvas() {
-      ctx.clearRect(0, 0, 400, 500);
-      y1 += levelSpeed;
-      x1 = Math.floor(Math.random() * 10 + x2); // jibber effect
-      boostScore = Math.floor(500 - y1);
-      drawBackground(background);
-      //drawGun();
-      drawHome();
-      drawPlayername();
-      drawLives();
-      drawBoost();
-      drawLevel();
-      drawScore();
-      //drawBottom();
-      drawCode();
-      drawLaser();
-      crashBottom();
-      drawCorrect();
-      //if (isCorrectFrameCount == 60) {drawLaser()};
-      if (gameLives < 1) {
-        drawGameOver();
-      } else {
-        // frameCount ++;
-        window.requestAnimationFrame(updateCanvas);
-      }
-    }
-
-    updateCanvas();
 
     function checkMatch() {
       isCorrectFrameCount = 60;
@@ -377,12 +334,42 @@ window.onload = function() {
       $("#enteredCode").val("");
     }
 
+    function updateCanvas() {
+      ctx.clearRect(0, 0, 400, 500);
+      y1 += levelSpeed;
+      x1 = Math.floor(Math.random() * 10 + x2); // jibber effect
+      boostScore = Math.floor(450 + 50 * levelCount - y1); // boosts score by level and reduces by y1 (the later you type, the less you get)
+      ctx.textAlign = "left";
+      drawBackground(background);
+      drawHome();
+      drawPlayername();
+      drawLives();
+      drawBoost();
+      drawLevel();
+      drawScore();
+      drawCode();
+      drawLaser();
+      crashBottom();
+      drawCorrect();
+      //if (isCorrectFrameCount == 60) {drawLaser()};
+      if (gameLives < 1) {
+        drawGameOver();
+      } else {
+        // frameCount ++;
+        window.requestAnimationFrame(updateCanvas);
+      }
+    }
+
+    updateCanvas();
+
+    // passes entered code by ENTER button (key 13)
     document.onkeydown = function(event) {
       if (event.keyCode == 13) {
         checkMatch();
       }
     };
 
+    // passes entered code by click on DOM button (Fire)
     document.getElementById("enterButton").onclick = function() {
       checkMatch();
     };
