@@ -97,7 +97,7 @@ window.onload = function() {
     };
     imgBack.src = "./images/backgrounds/background_1.png";
 
-    var imgBack2 = new Image();
+    /*var imgBack2 = new Image();
     imgBack2.onload = function() {
       ctx.drawImage(imgBack2, background.x, background.y, 400, 500);
     };
@@ -114,6 +114,7 @@ window.onload = function() {
       ctx.drawImage(imgBack4, background.x, background.y, 400, 500);
     };
     imgBack4.src = "./images/backgrounds/background_2.png";
+    */
 
 
     var imgHome = new Image();
