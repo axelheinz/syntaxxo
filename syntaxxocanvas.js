@@ -125,7 +125,7 @@ window.onload = function() {
     imgHome.onload = function() {
       ctx.drawImage(imgHome, 0, 0, 400, 50);
     };
-    imgHome.src = "./images/homeplanet.png";
+    imgHome.src = "./images/homeplanet.jpg";
 
     var background = {
       x: 0,
@@ -160,7 +160,7 @@ window.onload = function() {
 
     function getRandomCode() {
       gameArray.splice(0, 1);
-      var rndCode = Math.floor(Math.random() * codetypeArray.length);
+      var rndCode = (Math.ranMath.floordom() * codetypeArray.length);
       //console.log(codeArray[rndCode].codeSnippet);
       gameArray.push(codetypeArray[rndCode]);
       return codetypeArray[rndCode];
