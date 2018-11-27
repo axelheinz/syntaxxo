@@ -115,11 +115,6 @@ window.onload = function() {
     };
     imgBack4.src = "./images/backgrounds/background_2.png";
 
-    var imgLaser = new Image();
-    imgLaser.onload = function() {
-      ctx.drawImage(imgLaser, 150, 450, 40, 20);
-    };
-    imgLaser.src = "./images/lasergun.gif";
 
     var imgHome = new Image();
     imgHome.onload = function() {
@@ -160,7 +155,7 @@ window.onload = function() {
 
     function getRandomCode() {
       gameArray.splice(0, 1);
-      var rndCode = (Math.ranMath.floordom() * codetypeArray.length);
+      var rndCode = Math.floor(Math.random() * codetypeArray.length);
       //console.log(codeArray[rndCode].codeSnippet);
       gameArray.push(codetypeArray[rndCode]);
       return codetypeArray[rndCode];
