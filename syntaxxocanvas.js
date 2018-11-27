@@ -75,6 +75,7 @@ window.onload = function() {
     backgroundSound.onload = backgroundSound.play();
     codetypeArray = htmlArray;
     startGame();
+    
   };
 
   function startGame() {
