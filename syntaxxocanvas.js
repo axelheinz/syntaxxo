@@ -46,6 +46,7 @@ window.onload = function() {
   };
 
   function startGame() {
+    //ctx.clearRect(0, 0, 400, 500);
     var enterArray = []; // array of entered code elements that user typed
     var gameArray = []; // array of randomly picked code that user has to type
     var gameScore = 0; // score the user achieves
@@ -66,7 +67,7 @@ window.onload = function() {
     imgBack.onload = function() {
       ctx.drawImage(imgBack, background.x, background.y, 400, 500);
     };
-    imgBack.src = "./images/background_1.png";
+    imgBack.src = "./images/backgrounds/background_1.png";
 
     var imgLaser = new Image();
     imgLaser.onload = function() {
@@ -209,13 +210,13 @@ window.onload = function() {
       else {
         ctx.beginPath();
         ctx.strokeStyle = "#a5faff";
-        ctx.moveTo(195, 450);
+        ctx.moveTo(195, 453);
         ctx.lineTo(oldX1 + 30, oldY1);
         ctx.strokeStyle = "#a5faff";
-        ctx.moveTo(200, 450);
+        ctx.moveTo(200, 455);
         ctx.lineTo(oldX1 + 30, oldY1);
         ctx.strokeStyle = "#a5faff";
-        ctx.moveTo(205, 450);
+        ctx.moveTo(205, 457);
         ctx.lineTo(oldX1 + 30, oldY1);
         ctx.stroke();
         ctx.font = "30px Roboto";
@@ -249,15 +250,17 @@ window.onload = function() {
         ctx.font = "20px Roboto";
         ctx.fillStyle = "#6b6b6b";
         ctx.textAlign = "center";
-        ctx.fillText("HIGHSCORES", 202, 162);
+        ctx.fillText("HIGHSCORES", 202, 182);
         ctx.fillStyle = "#fff";
-        ctx.fillText("HIGHSCORES", 200, 160);
+        ctx.fillText("HIGHSCORES", 200, 180);
 
         if (index <= 9) {
           ctx.font = "20px Roboto";
           ctx.fillStyle = "#fff";
-          ctx.textAlign = "center";
-          ctx.fillText(el.name + "   " + el.score, 200, 190 + index * 30);
+          ctx.textAlign = "left";
+          ctx.fillText(el.name,100, 220 + index * 30);
+          ctx.textAlign = "right";
+          ctx.fillText(el.score, 290, 220 + index * 30);
         }
       });
     }
