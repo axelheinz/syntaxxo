@@ -13,7 +13,10 @@ var htmlArray = [
   "</div>",
   "<ul>",
   "<br>",
-  '<img src="">'
+  '</img>',
+  '<body>',
+  '</body>',
+  '<canvas>'
 ];
 
 var jscrArray = [
@@ -251,13 +254,22 @@ window.onload = function() {
       if (isCorrectFrameCount < 0) return;
       else {
         ctx.beginPath();
-        ctx.strokeStyle = "#a5faff";
+        var r = 255;
+        var g = Math.floor(Math.random() * 100 * 1.5);
+        var b = Math.floor(Math.random() * 100 * 1.5);
+        ctx.strokeStyle = "rgb(" + r + ", " + g + ", " + b + ")";
         ctx.moveTo(195, 453);
         ctx.lineTo(oldX1 + 30, oldY1);
-        ctx.strokeStyle = "#a5faff";
+        var r = 255;
+        var g = Math.floor(Math.random() * 100 * 1.0);
+        var b = Math.floor(Math.random() * 100 * 1.0);
+        ctx.strokeStyle = "rgb(" + r + ", " + g + ", " + b + ")";
         ctx.moveTo(200, 455);
         ctx.lineTo(oldX1 + 30, oldY1);
-        ctx.strokeStyle = "#a5faff";
+        var r = 255;
+        var g = Math.floor(Math.random() * 100 * 1.3);
+        var b = Math.floor(Math.random() * 100 * 1.3);
+        ctx.strokeStyle = "rgb(" + r + ", " + g + ", " + b + ")";
         ctx.moveTo(205, 457);
         ctx.lineTo(oldX1 + 30, oldY1);
         ctx.stroke();

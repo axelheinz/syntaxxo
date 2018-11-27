@@ -1,6 +1,6 @@
 html {
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   color: #00f4fc;
   font-weight: lighter;
   background: black;
@@ -14,9 +14,9 @@ h1 {
 body button {
   background-color: #00f4fc;
   color: #3b557f;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
-  padding: 10px 10px;
+  padding: 5px 5px;
   border: 50;
   border-color: white;
   border-radius: 5px;
@@ -37,15 +37,20 @@ body button {
 
 
 .inputLine {
-  font-size: 16px;
+  font-size: 14px;
   padding: 20px 20px 20px 0px;
 }
 
 .enterButton {
-  font-size: 16px;
-  padding: 10px 10px;
+  font-size: 14px;
+  padding: 5px 5px;
   border: 10;
   box-shadow: 50;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+.credentials {
+  font-size: 10px;
+  padding: 20px 20px 20px 0px;
 }
