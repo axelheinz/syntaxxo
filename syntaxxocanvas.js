@@ -1,7 +1,36 @@
 // Code elements that user has to type
-var htmlArray = ["<img>","<div>","<h1>","<li>","<th>","<button>","<a>","<span>","</p>",'id="game"',"</div>", "<ul>","<br>", '<img src="">']
+var htmlArray = [
+  "<img>",
+  "<div>",
+  "<h1>",
+  "<li>",
+  "<th>",
+  "<button>",
+  "<a>",
+  "<span>",
+  "</p>",
+  'id="game"',
+  "</div>",
+  "<ul>",
+  "<br>",
+  '<img src="">'
+];
 
-var jscrArray = ['var x=1','function(){}','var array=[]','ctx.clearRect()','window.onload','document.getElementById','$("#id").hide()','$("#id").show()','array.splice(0,1)','Math.floor(Math.random())', 'window.requestAnimationFrame()']
+var jscrArray = [
+  "var x=1",
+  "function(){}",
+  "var array=[]",
+  "ctx.clearRect()",
+  "window.onload",
+  "getElementById",
+  '$("#id")',
+  'show()',
+  'hide()',
+  "array.splice(0,1)",
+  "Math.floor",
+  "(Math.random())",
+  "requestAnimationFrame()"
+];
 
 var playerName = "";
 
@@ -31,7 +60,7 @@ window.onload = function() {
     codetypeArray = jscrArray;
     startGame();
   };
-  
+
   document.getElementById("startButtonHTML").onclick = function() {
     $("#enterButton")
       .parent()
@@ -50,17 +79,16 @@ window.onload = function() {
     var enterArray = []; // array of entered code elements that user typed
     var gameArray = []; // array of randomly picked code that user has to type
     var gameScore = 0; // score the user achieves
-    var gameLives = 1; // count of mistakes possible until game over
+    var gameLives = 5; // count of mistakes possible until game over
     var x1 = 180;
     var x2 = 100;
     var correctCount = 1;
     var levelCount = 1;
     var levelSpeed = 0.3;
-   
 
     var ctx = document.getElementById("syntaxxo-frame").getContext("2d");
-    ctx.clearRect(0, 0, 400, 200);
-    ctx.fillRect(20, 20, 400, 500); // drawing the frame for the code-parts
+    ctx.clearRect(0, 0, 400, 500);
+    //ctx.fillRect(20, 20, 400, 500); // drawing the frame for the code-parts
     //window.requestAnimationFrame(updateCanvas);
 
     var imgBack = new Image();
@@ -68,6 +96,24 @@ window.onload = function() {
       ctx.drawImage(imgBack, background.x, background.y, 400, 500);
     };
     imgBack.src = "./images/backgrounds/background_1.png";
+
+    var imgBack2 = new Image();
+    imgBack2.onload = function() {
+      ctx.drawImage(imgBack2, background.x, background.y, 400, 500);
+    };
+    imgBack2.src = "./images/backgrounds/background_4.png";
+
+    var imgBack3 = new Image();
+    imgBack3.onload = function() {
+      ctx.drawImage(imgBack3, background.x, background.y, 400, 500);
+    };
+    imgBack3.src = "./images/backgrounds/background_5.png";
+
+    var imgBack4 = new Image();
+    imgBack3.onload = function() {
+      ctx.drawImage(imgBack4, background.x, background.y, 400, 500);
+    };
+    imgBack4.src = "./images/backgrounds/background_2.png";
 
     var imgLaser = new Image();
     imgLaser.onload = function() {
@@ -167,10 +213,10 @@ window.onload = function() {
 
     function drawCode() {
       ctx.font = "20px Roboto";
-      var r= 100;
-      var g= Math.floor((Math.random()*100) * 2.5);
-      var b= Math.floor((Math.random()*100) * 2.5);
-      ctx.fillStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')'; 
+      var r = 100;
+      var g = Math.floor(Math.random() * 100 * 2.5);
+      var b = Math.floor(Math.random() * 100 * 2.5);
+      ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
       ctx.fillText(gameCode, x1, y1);
     }
 
@@ -221,10 +267,12 @@ window.onload = function() {
         ctx.stroke();
         ctx.font = "30px Roboto";
         if (isCorrect) {
+          if (correctCount % 5 === 0){
+          } else{
           ctx.fillStyle = "#4b8963";
           ctx.fillText("CORRECT!", oldX1 - 40, oldY1);
           ctx.fillStyle = "#8cffb8";
-          ctx.fillText("CORRECT!", oldX1 - 42, oldY1 - 2);
+          ctx.fillText("CORRECT!", oldX1 - 42, oldY1 - 2);}
         } else {
           ctx.fillStyle = "#a3352f";
           ctx.fillText("BUG!", oldX1 - 40, oldY1);
@@ -258,7 +306,7 @@ window.onload = function() {
           ctx.font = "20px Roboto";
           ctx.fillStyle = "#fff";
           ctx.textAlign = "left";
-          ctx.fillText(el.name,100, 220 + index * 30);
+          ctx.fillText(el.name, 100, 220 + index * 30);
           ctx.textAlign = "right";
           ctx.fillText(el.score, 290, 220 + index * 30);
         }
@@ -287,11 +335,13 @@ window.onload = function() {
       isCorrectFrameCount--;
       if (isCorrectFrameCount < 0) return;
       if (correctCount % 5 === 0) {
-        //ctx.fillStyle = "#2d2800";
-        //ctx.fillRect(0, 450, 400, 50);
-        ctx.font = "30px Roboto";
-        ctx.fillStyle = "#f9f759";
-        ctx.fillText("Level " + levelCount, 160, 480);
+        ctx.font = "40px Roboto";
+        var r = Math.floor(Math.random() * 100 * 2.5);
+        var g = Math.floor(Math.random() * 100 * 2.5);
+        var b = Math.floor(Math.random() * 100 * 2.5);
+        ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+        //ctx.fillStyle = "#f9f759";
+        ctx.fillText("Level " + levelCount, oldX1, oldY1);
       } else if (isCorrect) {
         //ctx.fillStyle = "#64b784";
         //ctx.fillRect(0, 450, 400, 50);
