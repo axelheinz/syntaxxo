@@ -20,7 +20,9 @@ var htmlArray = [
   '</canvas>',
   '<h5>',
   '</h3>',
-  'href=""'
+  'href=""',
+  '<input>',
+  '</input>'
 ];
 
 var jscrArray = [
@@ -152,6 +154,9 @@ window.onload = function() {
     
     var imgBackArray = [imgBack, imgBack2, imgBack3, imgBack4, imgBack5, imgBack6, imgBack7];
     var currentBack = 0;
+
+    var textbox = document.getElementById("enteredCode");
+    textbox.focus();
 
 
     var imgHome = new Image();
