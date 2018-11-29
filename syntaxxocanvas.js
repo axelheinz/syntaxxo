@@ -16,7 +16,11 @@ var htmlArray = [
   '</img>',
   '<body>',
   '</body>',
-  '<canvas>'
+  '<canvas>',
+  '</canvas>',
+  '<h5>',
+  '</h3>',
+  'href=""'
 ];
 
 var jscrArray = [
@@ -32,7 +36,10 @@ var jscrArray = [
   "array.splice(0,1)",
   "Math.floor",
   "(Math.random())",
-  "requestAnimationFrame()"
+  "requestAnimationFrame()",
+  ".parent()",
+  ".substr(0,1)"
+
 ];
 
 var playerName = "";
@@ -58,7 +65,10 @@ window.onload = function() {
     $("#startPage")
       .siblings()
       .hide();
+      $("#startButtonHTML").hide();
+      $("#startButtonJSC").hide();
     playerName = $("#enteredPlayer").prop("value");
+    playerName= playerName.substr(0,10);
     backgroundSound.onload = backgroundSound.play();
     codetypeArray = jscrArray;
     startGame();
@@ -71,7 +81,10 @@ window.onload = function() {
     $("#startPage")
       .siblings()
       .hide();
+      $("#startButtonHTML").hide();
+      $("#startButtonJSC").hide();
     playerName = $("#enteredPlayer").prop("value");
+    playerName= playerName.substr(0,10);
     backgroundSound.onload = backgroundSound.play();
     codetypeArray = htmlArray;
     startGame();
@@ -101,24 +114,44 @@ window.onload = function() {
     };
     imgBack.src = "./images/backgrounds/background_1.png";
 
-    /*var imgBack2 = new Image();
+    var imgBack2 = new Image();
     imgBack2.onload = function() {
       ctx.drawImage(imgBack2, background.x, background.y, 400, 500);
     };
     imgBack2.src = "./images/backgrounds/background_4.png";
-
+    
     var imgBack3 = new Image();
     imgBack3.onload = function() {
       ctx.drawImage(imgBack3, background.x, background.y, 400, 500);
     };
     imgBack3.src = "./images/backgrounds/background_5.png";
-
+    
     var imgBack4 = new Image();
-    imgBack3.onload = function() {
+    imgBack4.onload = function() {
       ctx.drawImage(imgBack4, background.x, background.y, 400, 500);
     };
     imgBack4.src = "./images/backgrounds/background_2.png";
-    */
+
+    var imgBack5 = new Image();
+    imgBack5.onload = function() {
+      ctx.drawImage(imgBack5, background.x, background.y, 400, 500);
+    };
+    imgBack5.src = "./images/backgrounds/background_6.png";
+
+    var imgBack6 = new Image();
+    imgBack5.onload = function() {
+      ctx.drawImage(imgBack6, background.x, background.y, 400, 500);
+    };
+    imgBack6.src = "./images/backgrounds/background_7.png";
+
+    var imgBack7 = new Image();
+    imgBack7.onload = function() {
+      ctx.drawImage(imgBack7, background.x, background.y, 400, 500);
+    };
+    imgBack7.src = "./images/backgrounds/background_7.png";
+    
+    var imgBackArray = [imgBack, imgBack2, imgBack3, imgBack4, imgBack5, imgBack6, imgBack7];
+    var currentBack = 0;
 
 
     var imgHome = new Image();
@@ -176,7 +209,7 @@ window.onload = function() {
       console.log("storing highscore");
       var highscoresArray =
         JSON.parse(localStorage.getItem("highscores")) || [];
-      highscoresArray.push({ name: playerName, score: gameScore });
+      highscoresArray.push({ name: playerName, score: gameScore, level: levelCount });
       localStorage.setItem("highscores", JSON.stringify(highscoresArray));
     }
 
@@ -202,9 +235,9 @@ window.onload = function() {
     }
 
     function drawBackground(background) {
-      imgX = imgX + 0.02;
-      imgY = imgY + 0.02;
-      ctx.drawImage(imgBack, background.x, background.y, imgX, imgY);
+      imgX = imgX + 0.03;
+      imgY = imgY + 0.03;
+      ctx.drawImage(imgBackArray[currentBack], background.x, background.y, imgX, imgY);
     }
 
     function drawHome() {
@@ -283,10 +316,13 @@ window.onload = function() {
           ctx.fillStyle = "#8cffb8";
           ctx.fillText("CORRECT!", oldX1 - 42, oldY1 - 2);}
         } else {
+          if (correctCount % 5 === 0){
+          } else{
           ctx.fillStyle = "#a3352f";
           ctx.fillText("BUG!", oldX1 - 40, oldY1);
           ctx.fillStyle = "#fc6f67";
           ctx.fillText("BUG!", oldX1 - 42, oldY1 - 2);
+          }
         }
       }
     }
@@ -315,9 +351,11 @@ window.onload = function() {
           ctx.font = "20px Roboto";
           ctx.fillStyle = "#fff";
           ctx.textAlign = "left";
-          ctx.fillText(el.name, 100, 220 + index * 30);
+          ctx.fillText(el.name, 60, 220 + index * 30);
           ctx.textAlign = "right";
-          ctx.fillText(el.score, 290, 220 + index * 30);
+          ctx.fillText(el.score, 240, 220 + index * 30);
+          ctx.textAlign = "left";
+          ctx.fillText("Level: " + el.level, 290, 220 + index * 30);
         }
       });
     }
@@ -338,6 +376,8 @@ window.onload = function() {
       drawHighscore();
       $("#enteredCode").val("");
       gameOver.play();
+      $("#startButtonHTML").show();
+      $("#startButtonJSC").show();
     }
 
     function drawCorrect() {
@@ -381,6 +421,7 @@ window.onload = function() {
           levelCount += 1;
           levelSpeed += 0.4;
           levelUp.play();
+          currentBack = Math.floor(Math.random()*6);
         }
       } else {
         console.log("DEBUG: FALSE");
